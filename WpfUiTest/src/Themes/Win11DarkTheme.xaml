@@ -26,15 +26,32 @@
     <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#FF3F3F3F"/>
     <SolidColorBrush x:Key="TextBoxFocusBorderBrush" Color="#FF60CDFF"/>
 
-    <!-- GridView 表头样式 -->
+    <!-- GridView 表头样式：上下无边框，左右分割线，高度与行对齐 -->
     <Style x:Key="Win11GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}"/>
-        <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="BorderThickness" Value="0,0,1,0"/>
+        <Setter Property="BorderBrush" Value="#FF3F3F3F"/>
+        <Setter Property="Padding" Value="6,0"/>
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Height" Value="28"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewColumnHeader">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            Height="{TemplateBinding Height}">
+                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Background" Value="{DynamicResource HeaderHoverBg}"/>
