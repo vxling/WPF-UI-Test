@@ -6,8 +6,8 @@
 
     <!-- 浅色主题配色 -->
     <SolidColorBrush x:Key="DataGridHeaderBackground" Color="#E8E8E8"/>
-    <SolidColorBrush x:Key="HeaderHoverBg" Color="#E8E8E8"/>
-    <SolidColorBrush x:Key="HeaderPressedBg" Color="#DCDCDC"/>
+    <SolidColorBrush x:Key="HeaderHoverBg" Color="#DCDCDC"/>
+    <SolidColorBrush x:Key="HeaderPressedBg" Color="#CACACA"/>
     <SolidColorBrush x:Key="DataGridHeaderForeground" Color="#1A1A1A"/>
     <SolidColorBrush x:Key="DataGridRowBackground" Color="#FFFFFF"/>
     <SolidColorBrush x:Key="DataGridRowAlternatingBackground" Color="#F9F9F9"/>
@@ -28,7 +28,7 @@
     <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#FFCCCCCC"/>
     <SolidColorBrush x:Key="TextBoxFocusBorderBrush" Color="#FF0078D4"/>
 
-    <!-- GridView 表头样式：上下无边框，左右分割线，高度与行对齐 -->
+    <!-- GridView 表头样式：完全自定义模板，hover/pressed 在 ControlTemplate.Triggers 内控制 -->
     <Style x:Key="Win11GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
         <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}"/>
@@ -44,7 +44,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
                     <Grid>
-                        <Border Background="{DynamicResource DataGridHeaderBackground}"
+                        <Border x:Name="Bd"
+                                Background="{DynamicResource DataGridHeaderBackground}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
                                 Padding="{TemplateBinding Padding}"
@@ -52,7 +53,6 @@
                             <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
-                        <!-- 右侧拖拽调整宽度的 Thumb -->
                         <Thumb x:Name="PART_HeaderGripper"
                                Width="4"
                                HorizontalAlignment="Right"
@@ -60,17 +60,17 @@
                                Opacity="0"
                                Background="{TemplateBinding BorderBrush}"/>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource HeaderHoverBg}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{DynamicResource HeaderPressedBg}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-        <Style.Triggers>
-            <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="{DynamicResource HeaderHoverBg}"/>
-            </Trigger>
-            <Trigger Property="IsPressed" Value="True">
-                <Setter Property="Background" Value="{DynamicResource HeaderPressedBg}"/>
-            </Trigger>
-        </Style.Triggers>
     </Style>
 
     <!-- 文本框样式 -->
