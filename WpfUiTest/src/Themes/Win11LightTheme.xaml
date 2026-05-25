@@ -29,7 +29,7 @@
     <FontFamily x:Key="SystemDefaultFont">Segoe UI</FontFamily>
 
     <!-- ===================== ListView 文件列表选中样式（ListViewItem） ===================== -->
-    <!-- 浅色主题：选中行左侧蓝色强调条 + 更明显背景 -->
+    <!-- 浅色主题：选中行左侧蓝色强调条 + 白字高亮背景 -->
     <Style x:Key="Win11FileListItemStyle" TargetType="ListViewItem">
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -39,6 +39,7 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
 
         <Setter Property="Template">
             <Setter.Value>
@@ -46,32 +47,34 @@
                     <Border x:Name="Bd"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
-                        <ContentPresenter/>
+                        <ContentPresenter VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <!-- 悬浮 -->
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource ControlHoverGrayBrush}"/>
                         </Trigger>
-                        <!-- 选中：有焦点 -->
+                        <!-- 选中+窗口活动：白字+系统蓝背景 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
-                                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
+                                <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource RowSelectedBackBrush}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
                             <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentPrimaryBrush}"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
                         </MultiTrigger>
-                        <!-- 选中：无焦点 -->
+                        <!-- 选中+窗口失活：浅灰背景 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
-                                <Condition Property="IsKeyboardFocusWithin" Value="False"/>
+                                <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FFE6F2FF"/>
                             <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D4"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
