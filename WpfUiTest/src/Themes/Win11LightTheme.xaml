@@ -43,14 +43,23 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="GridViewColumnHeader">
-                    <Border Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}"
-                            Height="{TemplateBinding Height}">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                    </Border>
+                    <Grid>
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}"
+                                Height="{TemplateBinding Height}">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <!-- 右侧拖拽调整宽度的 Thumb -->
+                        <Thumb x:Name="PART_HeaderGripper"
+                               Width="4"
+                               HorizontalAlignment="Right"
+                               Cursor="SizeWE"
+                               Opacity="0"
+                               Background="{TemplateBinding BorderBrush}"/>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

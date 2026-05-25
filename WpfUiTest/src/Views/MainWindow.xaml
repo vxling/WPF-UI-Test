@@ -74,7 +74,7 @@
                   ItemContainerStyle="{StaticResource Win11ListViewItemStyle}"
                   SelectionMode="Extended">
             <ListView.View>
-                <GridView>
+                <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
                     <GridViewColumn Header="📁" Width="45" DisplayMemberBinding="{Binding TypeIcon}"/>
                     <GridViewColumn Header="时间" Width="145" DisplayMemberBinding="{Binding TimestampDisplay}"/>
                     <GridViewColumn Header="仓库" Width="100" DisplayMemberBinding="{Binding RepoName}"/>
