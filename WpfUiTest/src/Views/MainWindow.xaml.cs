@@ -2,6 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Effects;
 using WpfUiTest.Themes;
 
 namespace WpfUiTest.Views;
@@ -12,15 +13,17 @@ public partial class MainWindow : Window
     private ListViewItem? _lastSelectedItem;
     private ListViewItem? _lastHoverItem;
 
+    // 内嵌边框画刷（用于选中时在内容外层套一层视觉边框，不撑尺寸）
+    private readonly SolidColorBrush _lightBorderBrush = new(Color.FromRgb(0x99, 0xC8, 0xF0));
+    private readonly SolidColorBrush _darkBorderBrush = new(Color.FromRgb(0x4A, 0x82, 0xC2));
+
     public MainWindow()
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel();
         UpdateThemeButton();
 
-        // 监听鼠标移动，用于实现 hover 效果
         SyncRecordList.PreviewMouseMove += SyncRecordList_PreviewMouseMove;
-        // 监听项生成，等所有项都生成后再统一绑定事件
         SyncRecordList.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
     }
 
@@ -28,16 +31,18 @@ public partial class MainWindow : Window
     {
         if (SyncRecordList.ItemContainerGenerator.Status == System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
         {
-            // 所有容器已生成，给每个 ListViewItem 绑定鼠标事件
             for (int i = 0; i < SyncRecordList.Items.Count; i++)
             {
                 var container = SyncRecordList.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                if (container != null && !container.IsMouseOver)
+                if (container != null)
                 {
+                    container.Padding = new Thickness(1); // 固定内边距
                     container.MouseEnter -= Item_MouseEnter;
                     container.MouseLeave -= Item_MouseLeave;
                     container.MouseEnter += Item_MouseEnter;
                     container.MouseLeave += Item_MouseLeave;
+                    // 初始样式
+                    ResetItemStyle(container);
                 }
             }
         }
@@ -45,7 +50,6 @@ public partial class MainWindow : Window
 
     private void SyncRecordList_PreviewMouseMove(object sender, MouseEventArgs e)
     {
-        // 通过鼠标下的元素找到 ListViewItem
         var dep = e.OriginalSource as DependencyObject;
         var item = FindAncestor<ListViewItem>(dep);
         if (item != _lastHoverItem)
@@ -86,7 +90,6 @@ public partial class MainWindow : Window
         _isDarkMode = !_isDarkMode;
         ThemeService.Instance.ApplyTheme(_isDarkMode ? "dark" : "light");
         UpdateThemeButton();
-        // 刷新所有行样式
         RefreshAllItemStyles();
     }
 
@@ -128,10 +131,14 @@ public partial class MainWindow : Window
 
     private void ApplySelectedStyle(ListViewItem item)
     {
+        item.Padding = new Thickness(1); // 固定不変
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x1F, 0x4A, 0x78))
             : new SolidColorBrush(Color.FromRgb(0xCC, 0xE8, 0xFF));
         item.Foreground = _isDarkMode ? Brushes.White : Brushes.Black;
+        // 用 BorderBrush 画内嵌边框，BorderThickness=1 但配合 Padding=1 不撑尺寸
+        item.BorderBrush = _isDarkMode ? _darkBorderBrush : _lightBorderBrush;
+        item.BorderThickness = new Thickness(1);
     }
 
     private void ApplyHoverStyle(ListViewItem item)
@@ -142,15 +149,20 @@ public partial class MainWindow : Window
         item.Foreground = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0xE5, 0xE5, 0xE5))
             : new SolidColorBrush(Color.FromRgb(0x1A, 0x1A, 0x1A));
+        // hover 时保持边框（1px 内嵌，不撑尺寸）
+        item.BorderThickness = new Thickness(1);
+        item.BorderBrush = _isDarkMode ? _darkBorderBrush : _lightBorderBrush;
     }
 
     private void ResetItemStyle(ListViewItem item)
     {
+        item.Padding = new Thickness(1); // 与选中状态一致，固定不变
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x1E, 0x1E, 0x1E))
             : Brushes.White;
         item.Foreground = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0xE5, 0xE5, 0xE5))
             : new SolidColorBrush(Color.FromRgb(0x1A, 0x1A, 0x1A));
+        item.BorderThickness = new Thickness(0);
     }
 }
