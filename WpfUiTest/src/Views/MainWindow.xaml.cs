@@ -25,9 +25,14 @@ public partial class MainWindow : Window
 
     private void SyncRecordList_Loaded(object sender, RoutedEventArgs e)
     {
-        // ListView 加载完成后，给每个 ListViewItem 绑定事件并设置初始样式
-        SyncRecordList.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
         SyncRecordList.PreviewMouseMove += SyncRecordList_PreviewMouseMove;
+        SyncRecordList.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
+        // 如果容器已经生成完毕，直接处理
+        if (SyncRecordList.ItemContainerGenerator.Status ==
+            System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+        {
+            ApplyStyleToAllItems();
+        }
     }
 
     private void ItemContainerGenerator_StatusChanged(object? sender, EventArgs e)
@@ -35,19 +40,26 @@ public partial class MainWindow : Window
         if (SyncRecordList.ItemContainerGenerator.Status ==
             System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
         {
-            for (int i = 0; i < SyncRecordList.Items.Count; i++)
+            ApplyStyleToAllItems();
+        }
+    }
+
+    private void ApplyStyleToAllItems()
+    {
+        for (int i = 0; i < SyncRecordList.Items.Count; i++)
+        {
+            var container = SyncRecordList.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
+            if (container != null)
             {
-                var container = SyncRecordList.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                if (container != null)
-                {
-                    // 固定 Padding，全程不变化
-                    container.Padding = new Thickness(1);
-                    container.MouseEnter -= Item_MouseEnter;
-                    container.MouseLeave -= Item_MouseLeave;
-                    container.MouseEnter += Item_MouseEnter;
-                    container.MouseLeave += Item_MouseLeave;
+                container.Padding = new Thickness(1);
+                container.MouseEnter -= Item_MouseEnter;
+                container.MouseLeave -= Item_MouseLeave;
+                container.MouseEnter += Item_MouseEnter;
+                container.MouseLeave += Item_MouseLeave;
+                if (container == _lastSelectedItem)
+                    ApplySelectedStyle(container);
+                else
                     ResetItemStyle(container);
-                }
             }
         }
     }
@@ -94,26 +106,13 @@ public partial class MainWindow : Window
         _isDarkMode = !_isDarkMode;
         ThemeService.Instance.ApplyTheme(_isDarkMode ? "dark" : "light");
         UpdateThemeButton();
-        // 主题切换后，重新生成所有容器并应用样式
-        SyncRecordList.ItemContainerGenerator.StatusChanged -= ItemContainerGenerator_StatusChanged;
-        SyncRecordList.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
-        // 强制重新生成容器
-        if (SyncRecordList.ItemContainerGenerator.Status ==
-            System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+        // 等容器就绪后再刷新样式
+        SyncRecordList.Dispatcher.BeginInvoke(new Action(() =>
         {
-            for (int i = 0; i < SyncRecordList.Items.Count; i++)
-            {
-                var container = SyncRecordList.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
-                if (container != null)
-                {
-                    container.Padding = new Thickness(1);
-                    if (container == _lastSelectedItem)
-                        ApplySelectedStyle(container);
-                    else
-                        ResetItemStyle(container);
-                }
-            }
-        }
+            if (SyncRecordList.ItemContainerGenerator.Status ==
+                System.Windows.Controls.Primitives.GeneratorStatus.ContainersGenerated)
+                ApplyStyleToAllItems();
+        }), System.Windows.Threading.DispatcherPriority.Loaded);
     }
 
     private void UpdateThemeButton()
