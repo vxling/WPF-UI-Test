@@ -61,9 +61,9 @@
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FFDCEEFF"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
-                            <Setter Property="Foreground" Value="#004D7A"/>
+                            <Setter Property="Foreground" Value="#000000"/>
                         </MultiTrigger>
                         <!-- 选中+窗口失活：淡灰蓝底 -->
                         <MultiTrigger>
@@ -71,9 +71,9 @@
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FFEAF3FF"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
-                            <Setter Property="Foreground" Value="#004D7A"/>
+                            <Setter Property="Foreground" Value="#000000"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -208,7 +208,7 @@
 
     <!-- ===================== GridView 表头扁平化（去除渐变） ===================== -->
     <Style x:Key="Win11GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
-        <Setter Property="Background" Value="#FFF5F5F5"/>
+        <Setter Property="Background" Value="#FFF3F3F3"/>
         <Setter Property="Foreground" Value="#FF1A1A1A"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="BorderBrush" Value="#FFE0E0E0"/>
