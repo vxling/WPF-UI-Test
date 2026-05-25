@@ -5,7 +5,7 @@
     <FontFamily x:Key="SystemDefaultFont">Segoe UI</FontFamily>
 
     <!-- 浅色主题配色 -->
-    <SolidColorBrush x:Key="DataGridHeaderBackground" Color="#F3F3F3"/>
+    <SolidColorBrush x:Key="DataGridHeaderBackground" Color="#E8E8E8"/>
     <SolidColorBrush x:Key="HeaderHoverBg" Color="#E8E8E8"/>
     <SolidColorBrush x:Key="HeaderPressedBg" Color="#DCDCDC"/>
     <SolidColorBrush x:Key="DataGridHeaderForeground" Color="#1A1A1A"/>
