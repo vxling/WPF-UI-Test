@@ -3,22 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:helpers="clr-namespace:WpfUiTest.Themes"
         mc:Ignorable="d"
         Title="WPF UI Test - SyncRecord List" Height="500" Width="950"
         MinHeight="400" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackBrush}">
-
-    <Window.Resources>
-        <!-- 隐式 ListViewItem style：不替换模板，只改默认属性和行为 -->
-        <!-- 注意：不写 x:Key，会自动应用到所有 ListViewItem，不影响 GridView 列绑定 -->
-        <Style TargetType="ListViewItem">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="1"/>
-            <Setter Property="Margin" Value="0"/>
-        </Style>
-    </Window.Resources>
 
     <DockPanel Margin="12">
         <!-- Top bar -->
