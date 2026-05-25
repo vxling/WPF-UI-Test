@@ -126,7 +126,7 @@ public partial class MainWindow : Window
     {
         item.Background = _isDarkMode ? DarkBgNormal : Brushes.White;
         item.Foreground = _isDarkMode ? DarkFgNormal : LightFgNormal;
-        item.BorderBrush = _isDarkMode ? DarkBorderBrush : LightBorderBrush;
+        item.BorderBrush = Brushes.Transparent;  // 默认无边框
         item.BorderThickness = new Thickness(1);
     }
 }
