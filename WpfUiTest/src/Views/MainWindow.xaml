@@ -14,7 +14,7 @@
         <Style x:Key="Win11ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Padding" Value="1,6"/>
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Template">
                 <Setter.Value>
