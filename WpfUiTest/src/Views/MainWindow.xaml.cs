@@ -12,6 +12,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         DataContext = new MainWindowViewModel();
+        _isDarkMode = ThemeWatcher.Instance.IsSystemDarkMode();
         UpdateThemeButton();
     }
 
@@ -19,6 +20,12 @@ public partial class MainWindow : Window
     {
         _isDarkMode = !_isDarkMode;
         ThemeService.Instance.ApplyTheme(_isDarkMode ? "dark" : "light");
+        UpdateThemeButton();
+    }
+
+    public void UpdateThemeToggleButton(bool isDarkMode)
+    {
+        _isDarkMode = isDarkMode;
         UpdateThemeButton();
     }
 
