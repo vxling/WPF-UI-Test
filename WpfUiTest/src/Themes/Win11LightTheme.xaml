@@ -54,16 +54,16 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource ControlHoverGrayBrush}"/>
                         </Trigger>
-                        <!-- 选中+窗口活动：白字+系统蓝背景 -->
+                        <!-- 选中+窗口活动：黑字+系统蓝背景 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentPrimaryBrush}"/>
                             <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentPrimaryBrush}"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
-                            <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+                            <Setter Property="Foreground" Value="White"/>
                         </MultiTrigger>
                         <!-- 选中+窗口失活：浅灰背景 -->
                         <MultiTrigger>
