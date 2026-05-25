@@ -139,7 +139,7 @@ public partial class MainWindow : Window
     private void ApplySelectedStyle(ListViewItem item)
     {
         item.Padding = new Thickness(1);
-        item.BorderThickness = new Thickness(1);
+        item.BorderThickness = new Thickness(1);  // 固定不变
         item.BorderBrush = _isDarkMode ? _darkBorderBrush : _lightBorderBrush;
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x1F, 0x4A, 0x78))
@@ -150,7 +150,7 @@ public partial class MainWindow : Window
     private void ApplyHoverStyle(ListViewItem item)
     {
         item.Padding = new Thickness(1);
-        item.BorderThickness = new Thickness(1);
+        item.BorderThickness = new Thickness(1);  // 固定不变
         item.BorderBrush = _isDarkMode ? _darkBorderBrush : _lightBorderBrush;
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x38, 0x38, 0x38))
@@ -162,8 +162,9 @@ public partial class MainWindow : Window
 
     private void ResetItemStyle(ListViewItem item)
     {
-        item.Padding = new Thickness(1);
-        item.BorderThickness = new Thickness(0);
+        item.Padding = new Thickness(1);  // 固定不变
+        item.BorderThickness = new Thickness(1);  // 固定不变，边框颜色变透明
+        item.BorderBrush = Brushes.Transparent;  // 颜色透明，不占位
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x1E, 0x1E, 0x1E))
             : Brushes.White;
