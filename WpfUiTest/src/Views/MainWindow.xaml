@@ -74,13 +74,13 @@
                   ItemContainerStyle="{StaticResource Win11ListViewItemStyle}"
                   SelectionMode="Extended">
             <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
+                <GridView>
                     <GridViewColumn Header="📁" Width="45" DisplayMemberBinding="{Binding TypeIcon}"/>
                     <GridViewColumn Header="时间" Width="145" DisplayMemberBinding="{Binding TimestampDisplay}"/>
                     <GridViewColumn Header="仓库" Width="100" DisplayMemberBinding="{Binding RepoName}"/>
                     <GridViewColumn Header="文件" Width="280" DisplayMemberBinding="{Binding FilePath}"/>
                     <GridViewColumn Header="操作" Width="80" DisplayMemberBinding="{Binding OperationDisplay}"/>
-                    <GridViewColumn Header="结果" Width="70" DisplayMemberBinding="{Binding ResultDisplay}"/>
+                    <GridViewColumn Header="结果" DisplayMemberBinding="{Binding ResultDisplay}"/>
                 </GridView>
             </ListView.View>
         </ListView>
