@@ -10,6 +10,7 @@ public partial class MainWindow : Window
 {
     private bool _isDarkMode = true;
     private ListViewItem? _lastSelectedItem;
+    private ListViewItem? _lastHoverItem;
 
     private static readonly SolidColorBrush LightBorderBrush = new(Color.FromRgb(0x99, 0xC8, 0xF0));
     private static readonly SolidColorBrush DarkBorderBrush = new(Color.FromRgb(0x4A, 0x82, 0xC2));
@@ -29,6 +30,7 @@ public partial class MainWindow : Window
     private void SyncRecordList_Loaded(object sender, RoutedEventArgs e)
     {
         SyncRecordList.ItemContainerGenerator.StatusChanged += ItemContainerGenerator_StatusChanged;
+        SyncRecordList.PreviewMouseMove += SyncRecordList_PreviewMouseMove;
     }
 
     private void ItemContainerGenerator_StatusChanged(object? sender, EventArgs e)
@@ -40,27 +42,23 @@ public partial class MainWindow : Window
             {
                 var container = SyncRecordList.ItemContainerGenerator.ContainerFromIndex(i) as ListViewItem;
                 if (container != null)
-                {
-                    container.MouseEnter -= Item_MouseEnter;
-                    container.MouseLeave -= Item_MouseLeave;
-                    container.MouseEnter += Item_MouseEnter;
-                    container.MouseLeave += Item_MouseLeave;
                     ResetItemStyle(container);
-                }
             }
         }
     }
 
-    private void Item_MouseEnter(object sender, MouseEventArgs e)
+    private void SyncRecordList_PreviewMouseMove(object sender, MouseEventArgs e)
     {
-        if (sender is ListViewItem item && item != _lastSelectedItem)
-            ApplyHoverStyle(item);
-    }
-
-    private void Item_MouseLeave(object sender, MouseEventArgs e)
-    {
-        if (sender is ListViewItem item && item != _lastSelectedItem)
-            ResetItemStyle(item);
+        var dep = e.OriginalSource as DependencyObject;
+        var item = FindAncestor<ListViewItem>(dep);
+        if (item != _lastHoverItem)
+        {
+            if (_lastHoverItem != null && _lastHoverItem != _lastSelectedItem)
+                ResetItemStyle(_lastHoverItem);
+            if (item != null && item != _lastSelectedItem)
+                ApplyHoverStyle(item);
+            _lastHoverItem = item;
+        }
     }
 
     private void ThemeToggle_Click(object sender, RoutedEventArgs e)
@@ -104,29 +102,43 @@ public partial class MainWindow : Window
         }
     }
 
+    private static T? FindAncestor<T>(DependencyObject? current) where T : DependencyObject
+    {
+        while (current != null)
+        {
+            if (current is T result)
+                return result;
+            current = VisualTreeHelper.GetParent(current);
+        }
+        return null;
+    }
+
     private void ApplySelectedStyle(ListViewItem item)
     {
+        item.Padding = new Thickness(1);
+        item.BorderThickness = new Thickness(1);
+        item.BorderBrush = _isDarkMode ? DarkBorderBrush : LightBorderBrush;
         item.Background = _isDarkMode
             ? new SolidColorBrush(Color.FromRgb(0x1F, 0x4A, 0x78))
             : new SolidColorBrush(Color.FromRgb(0xCC, 0xE8, 0xFF));
         item.Foreground = _isDarkMode ? Brushes.White : Brushes.Black;
-        item.BorderBrush = _isDarkMode ? DarkBorderBrush : LightBorderBrush;
-        item.BorderThickness = new Thickness(1);
     }
 
     private void ApplyHoverStyle(ListViewItem item)
     {
+        item.Padding = new Thickness(1);
+        item.BorderThickness = new Thickness(1);
+        item.BorderBrush = _isDarkMode ? DarkBorderBrush : LightBorderBrush;
         item.Background = _isDarkMode ? DarkBgHover : LightBgHover;
         item.Foreground = _isDarkMode ? DarkFgNormal : LightFgNormal;
-        item.BorderBrush = _isDarkMode ? DarkBorderBrush : LightBorderBrush;
-        item.BorderThickness = new Thickness(1);
     }
 
     private void ResetItemStyle(ListViewItem item)
     {
+        item.Padding = new Thickness(1);
+        item.BorderThickness = new Thickness(1);
+        item.BorderBrush = Brushes.Transparent;
         item.Background = _isDarkMode ? DarkBgNormal : Brushes.White;
         item.Foreground = _isDarkMode ? DarkFgNormal : LightFgNormal;
-        item.BorderBrush = Brushes.Transparent;  // 默认无边框
-        item.BorderThickness = new Thickness(1);
     }
 }
