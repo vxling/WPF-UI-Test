@@ -21,12 +21,12 @@
                     BorderThickness="0"/>
         </StackPanel>
 
-        <!-- ListView -->
+        <!-- ListView - 用代码处理行样式，不用 ItemContainerStyle 避免破坏 GridView -->
         <ListView x:Name="SyncRecordList"
                   Background="Transparent"
                   BorderThickness="0"
-                  ItemContainerStyle="{DynamicResource Win11FileListItemStyle}"
-                  ItemsSource="{Binding SyncRecords}">
+                  ItemsSource="{Binding SyncRecords}"
+                  SelectionChanged="SyncRecordList_SelectionChanged">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
                     <GridViewColumn Header="📁" Width="45" DisplayMemberBinding="{Binding TypeIcon}"/>
