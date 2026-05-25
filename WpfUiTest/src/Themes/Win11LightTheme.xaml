@@ -14,6 +14,8 @@
     <SolidColorBrush x:Key="DataGridRowSelectedBackground" Color="#CCE8FF"/>
     <SolidColorBrush x:Key="DataGridRowSelectedForeground" Color="#000000"/>
     <SolidColorBrush x:Key="RowSelectedBorder" Color="#99C8F0"/>
+    <SolidColorBrush x:Key="RowHoverBg" Color="#FFF0F0F0"/>
+    <SolidColorBrush x:Key="RowSelectedBorderBrush" Color="#99C8F0"/>
 
     <!-- 基础刷子 -->
     <SolidColorBrush x:Key="WindowBackBrush" Color="#FFFFFFFF"/>

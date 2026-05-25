@@ -10,7 +10,7 @@
         Background="{DynamicResource WindowBackBrush}">
 
     <Window.Resources>
-        <!-- 自定义 ListViewItem 模板：一层 Border + GridViewRowPresenter，无多层叠加 -->
+        <!-- 自定义 ListViewItem 模板：选中/悬浮由 Trigger+DynamicResource 控制，支持主题切换 -->
         <Style x:Key="Win11ListViewItemStyle" TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -26,6 +26,16 @@
                                 Padding="{TemplateBinding Padding}">
                             <GridViewRowPresenter/>
                         </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource RowHoverBg}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource RowSelectedBg}"/>
+                                <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource RowSelectedBorderBrush}"/>
+                                <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
@@ -53,8 +63,7 @@
                   BorderThickness="0"
                   ItemsSource="{Binding SyncRecords}"
                   ItemContainerStyle="{StaticResource Win11ListViewItemStyle}"
-                  Loaded="SyncRecordList_Loaded"
-                  SelectionChanged="SyncRecordList_SelectionChanged">
+                  SelectionMode="Extended">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
                     <GridViewColumn Header="📁" Width="45" DisplayMemberBinding="{Binding TypeIcon}"/>
