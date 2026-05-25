@@ -13,6 +13,11 @@
     <Color x:Key="DarkControlBorderNormal">#FF444444</Color>
     <Color x:Key="DarkControlHoverGray">#FF2C2D30</Color>
 
+    <!-- 深色主题也提供通用键（兼容浅色主题的资源引用） -->
+    <SolidColorBrush x:Key="WindowBackBrush" Color="{StaticResource DarkWindowBack}"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource DarkTextPrimary}"/>
+    <SolidColorBrush x:Key="ControlHoverGrayBrush" Color="{StaticResource DarkControlHoverGray}"/>
+
     <!-- 画刷绑定 -->
     <SolidColorBrush x:Key="DarkAccentPrimaryBrush" Color="{StaticResource DarkAccentPrimary}"/>
     <SolidColorBrush x:Key="DarkAccentDarkBrush" Color="{StaticResource DarkAccentDark}"/>
