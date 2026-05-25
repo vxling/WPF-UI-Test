@@ -31,9 +31,10 @@
                                 <Setter TargetName="Bd" Property="Background" Value="{DynamicResource RowHoverBg}"/>
                             </Trigger>
                             <Trigger Property="IsSelected" Value="True">
-                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource RowSelectedBg}"/>
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource DataGridRowSelectedBackground}"/>
                                 <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource RowSelectedBorderBrush}"/>
                                 <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                                <Setter Property="Foreground" Value="{DynamicResource DataGridRowSelectedForeground}"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
