@@ -62,8 +62,7 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FF0078D4"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D4"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
                             <Setter Property="Foreground" Value="White"/>
                         </MultiTrigger>
                         <!-- 选中+窗口失活：淡蓝灰底 -->
@@ -73,8 +72,7 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FFD0D0D0"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D4"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
                             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
