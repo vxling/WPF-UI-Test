@@ -29,10 +29,11 @@
     <FontFamily x:Key="SystemDefaultFont">Segoe UI</FontFamily>
 
     <!-- ===================== ListView 文件列表选中样式（ListViewItem） ===================== -->
-    <!-- 浅色主题：选中行左侧蓝色强调条 + 白字高亮背景 -->
+    <!-- 浅色主题：跟随 Windows 文件管理器标准配色 -->
     <Style x:Key="Win11FileListItemStyle" TargetType="ListViewItem">
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
-        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+        <Setter Property="Background" Value="{StaticResource WindowBackBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
@@ -47,31 +48,32 @@
                     <Border x:Name="Bd"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
-                        <ContentPresenter VerticalAlignment="Center"/>
+                        <ContentPresenter VerticalAlignment="Center"
+                                          Foreground="{TemplateBinding Foreground}"/>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!-- 悬浮 -->
+                        <!-- 悬浮：浅灰 -->
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource ControlHoverGrayBrush}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FFF0F0F0"/>
                         </Trigger>
-                        <!-- 选中+窗口活动：黑字+系统蓝背景 -->
+                        <!-- 选中+窗口活动：蓝底白字 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource AccentPrimaryBrush}"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource AccentPrimaryBrush}"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FF0078D4"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D4"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
                             <Setter Property="Foreground" Value="White"/>
                         </MultiTrigger>
-                        <!-- 选中+窗口失活：浅灰背景 -->
+                        <!-- 选中+窗口失活：淡蓝灰底 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FFE6F2FF"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FFD0D0D0"/>
                             <Setter TargetName="Bd" Property="BorderBrush" Value="#FF0078D4"/>
                             <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
                             <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
