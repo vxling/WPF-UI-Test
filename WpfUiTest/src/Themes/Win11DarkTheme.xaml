@@ -5,7 +5,7 @@
     <Color x:Key="DarkAccentPrimary">#FF60CDFF</Color>
     <Color x:Key="DarkAccentDark">#FF3A9BD8</Color>
     <Color x:Key="DarkRowSelectedBack">#FF626262</Color>
-    <Color x:Key="DarkRowSelectedBorder">#FF93BCCE</Color>
+    <Color x:Key="DarkRowSelectedBorder">#FF4A82C2</Color>
     <Color x:Key="DarkFocusWhiteBorder">#FFFFFFFF</Color>
     <Color x:Key="DarkWindowBack">#FF202124</Color>
     <Color x:Key="DarkTextPrimary">#FFF3F4F6</Color>
@@ -66,8 +66,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FF1F4A78"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource DarkRowSelectedBorderBrush}"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Padding" Value="0.5"/>
                         </MultiTrigger>
                         <!-- 选中+窗口失活：稍浅深蓝底 -->
                         <MultiTrigger>
@@ -76,8 +78,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FF2A5A8A"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource DarkRowSelectedBorderBrush}"/>
                             <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Padding" Value="0.5"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

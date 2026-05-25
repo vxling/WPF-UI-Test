@@ -5,7 +5,7 @@
     <Color x:Key="SystemAccentPrimaryColor">#FF0078D4</Color>
     <Color x:Key="SystemAccentDarkColor">#FF005A9E</Color>
     <Color x:Key="SystemRowSelectedBackColor">#FFCCE8FF</Color>
-    <Color x:Key="SystemRowSelectedBorderColor">#FF0078D4</Color>
+    <Color x:Key="SystemRowSelectedBorderColor">#FF99C8F0</Color>
     <Color x:Key="SystemFocusBlackBorderColor">#FF000000</Color>
     <Color x:Key="SystemWindowBackColor">#FFFFFFFF</Color>
     <Color x:Key="SystemTextPrimaryColor">#FF000000</Color>
@@ -62,8 +62,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource RowSelectedBorderBrush}"/>
                             <Setter Property="Foreground" Value="#000000"/>
+                            <Setter Property="Padding" Value="0.5"/>
                         </MultiTrigger>
                         <!-- 选中+窗口失活：淡灰蓝底 -->
                         <MultiTrigger>
@@ -72,8 +74,10 @@
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
                             <Setter TargetName="Bd" Property="Background" Value="#FFCCE8FF"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource RowSelectedBorderBrush}"/>
                             <Setter Property="Foreground" Value="#000000"/>
+                            <Setter Property="Padding" Value="0.5"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
