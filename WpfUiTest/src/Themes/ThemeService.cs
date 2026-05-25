@@ -32,19 +32,29 @@ public class ThemeService
                 Source = new Uri($"pack://application:,,,/WpfUiTest;component/Themes/{fileName}")
             };
 
-            ResourceDictionary? toRemove = null;
+            // 移除旧的 Win11 主题字典
+            var toRemove = new List<ResourceDictionary>();
             foreach (var d in Application.Current.Resources.MergedDictionaries)
             {
                 if (d.Source?.OriginalString.Contains("Win11") == true)
-                {
-                    toRemove = d;
-                    break;
-                }
+                    toRemove.Add(d);
             }
-            if (toRemove != null)
-                Application.Current.Resources.MergedDictionaries.Remove(toRemove);
+            foreach (var d in toRemove)
+                Application.Current.Resources.MergedDictionaries.Remove(d);
 
+            // 插入新主题到最前面（优先命中）
             Application.Current.Resources.MergedDictionaries.Insert(0, dict);
+
+            // 强制让所有窗口重新读取样式
+            // WPF 的 DynamicResource 在字典更换后会自动更新，但需要触发一下 visual 更新
+            foreach (Window w in Application.Current.Windows)
+            {
+                w.Dispatcher.InvokeAsync(() =>
+                {
+                    w.InvalidateVisual();
+                    w.InvalidateProperty(Window.BackgroundProperty);
+                });
+            }
         }
         catch (Exception ex)
         {
