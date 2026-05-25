@@ -29,6 +29,13 @@
                   ItemsSource="{Binding SyncRecords}">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
+                    <GridViewColumn Header="📁" Width="40">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="📁" FontSize="14" HorizontalAlignment="Center"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                     <GridViewColumn Header="时间" Width="150" DisplayMemberBinding="{Binding TimestampDisplay}"/>
                     <GridViewColumn Header="仓库" Width="100" DisplayMemberBinding="{Binding RepoName}"/>
                     <GridViewColumn Header="文件" Width="280" DisplayMemberBinding="{Binding FilePath}"/>
