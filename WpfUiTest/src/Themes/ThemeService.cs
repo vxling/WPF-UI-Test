@@ -42,19 +42,8 @@ public class ThemeService
             foreach (var d in toRemove)
                 Application.Current.Resources.MergedDictionaries.Remove(d);
 
-            // 插入新主题到最前面（优先命中）
+            // 插入新主题到最前面
             Application.Current.Resources.MergedDictionaries.Insert(0, dict);
-
-            // 强制让所有窗口重新读取样式
-            // WPF 的 DynamicResource 在字典更换后会自动更新，但需要触发一下 visual 更新
-            foreach (Window w in Application.Current.Windows)
-            {
-                w.Dispatcher.InvokeAsync(() =>
-                {
-                    w.InvalidateVisual();
-                    w.InvalidateProperty(Window.BackgroundProperty);
-                });
-            }
         }
         catch (Exception ex)
         {
