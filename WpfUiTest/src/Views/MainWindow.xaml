@@ -19,7 +19,7 @@
                   Background="Transparent"
                   BorderThickness="0"
                   ItemContainerStyle="{StaticResource Win11FileListItemStyle}"
-                  d:ItemsSource="{d:SampleData ItemCount=8}">
+                  ItemsSource="{Binding SyncRecords}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="时间" Width="150" DisplayMemberBinding="{Binding TimestampDisplay}"/>
