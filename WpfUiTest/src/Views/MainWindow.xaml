@@ -9,6 +9,16 @@
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackBrush}">
 
+    <Window.Resources>
+        <!-- 隐式 style：让 ListViewItem 内容撑满，不会有半个背景的问题 -->
+        <Style TargetType="ListViewItem">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Margin" Value="0"/>
+        </Style>
+    </Window.Resources>
+
     <DockPanel Margin="12">
         <!-- Top bar: label + theme toggle -->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
@@ -21,7 +31,7 @@
                     BorderThickness="0"/>
         </StackPanel>
 
-        <!-- ListView - 完全不用 ItemContainerStyle，用代码处理所有样式 -->
+        <!-- ListView -->
         <ListView x:Name="SyncRecordList"
                   Background="{DynamicResource WindowBackBrush}"
                   BorderThickness="0"
