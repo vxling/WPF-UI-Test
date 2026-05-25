@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="WPF UI Test - SyncRecord List" Height="500" Width="900"
-        MinHeight="400" MinWidth="700"
+        Title="WPF UI Test - SyncRecord List" Height="500" Width="950"
+        MinHeight="400" MinWidth="800"
         WindowStartupLocation="CenterScreen"
         Background="{DynamicResource WindowBackBrush}">
 
@@ -21,7 +21,7 @@
                     BorderThickness="0"/>
         </StackPanel>
 
-        <!-- ListView - 用 DynamicResource 让样式跟随主题切换 -->
+        <!-- ListView -->
         <ListView x:Name="SyncRecordList"
                   Background="Transparent"
                   BorderThickness="0"
@@ -29,18 +29,12 @@
                   ItemsSource="{Binding SyncRecords}">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{DynamicResource Win11GridViewColumnHeaderStyle}">
-                    <GridViewColumn Header="📁" Width="40">
-                        <GridViewColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="📁" FontSize="14" HorizontalAlignment="Center"/>
-                            </DataTemplate>
-                        </GridViewColumn.CellTemplate>
-                    </GridViewColumn>
-                    <GridViewColumn Header="时间" Width="150" DisplayMemberBinding="{Binding TimestampDisplay}"/>
+                    <GridViewColumn Header="📁" Width="45" DisplayMemberBinding="{Binding TypeIcon}"/>
+                    <GridViewColumn Header="时间" Width="145" DisplayMemberBinding="{Binding TimestampDisplay}"/>
                     <GridViewColumn Header="仓库" Width="100" DisplayMemberBinding="{Binding RepoName}"/>
                     <GridViewColumn Header="文件" Width="280" DisplayMemberBinding="{Binding FilePath}"/>
-                    <GridViewColumn Header="操作" Width="100" DisplayMemberBinding="{Binding OperationDisplay}"/>
-                    <GridViewColumn Header="结果" Width="80" DisplayMemberBinding="{Binding ResultDisplay}"/>
+                    <GridViewColumn Header="操作" Width="80" DisplayMemberBinding="{Binding OperationDisplay}"/>
+                    <GridViewColumn Header="结果" Width="70" DisplayMemberBinding="{Binding ResultDisplay}"/>
                 </GridView>
             </ListView.View>
         </ListView>

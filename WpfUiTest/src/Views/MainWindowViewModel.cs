@@ -6,6 +6,7 @@ namespace WpfUiTest.Views;
 public class SyncRecord : INotifyPropertyChanged
 {
     private bool _isSelected;
+    public string TypeIcon { get; set; } = "📁";
     public string TimestampDisplay { get; set; } = "";
     public string RepoName { get; set; } = "";
     public string FilePath { get; set; } = "";
