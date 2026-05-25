@@ -5,9 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- 微软官方 Fluent 主题 (.NET 9+ 内置) -->
-                <ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml"/>
-                <!-- 自定义 Win11 主题（后加载以覆盖 Fluent 默认样式） -->
+                <!-- 自定义 Win11 主题（无 Fluent，避免 GridViewColumnHeader 被隐式样式覆盖） -->
                 <ResourceDictionary Source="pack://application:,,,/WpfUiTest;component/Themes/Win11DarkTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
