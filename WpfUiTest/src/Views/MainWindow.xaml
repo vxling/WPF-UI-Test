@@ -57,6 +57,13 @@
                     Background="{DynamicResource ControlHoverGrayBrush}"
                     Foreground="{DynamicResource TextPrimaryBrush}"
                     BorderThickness="0"/>
+            <Button Content="系统默认按钮" Margin="12,0,0,0" Padding="12,4"
+                    VerticalAlignment="Center"/>
+            <ComboBox Margin="12,0,0,0" Padding="8,4" Width="130" VerticalAlignment="Center">
+                <ComboBoxItem Content="选项 A"/>
+                <ComboBoxItem Content="选项 B"/>
+                <ComboBoxItem Content="选项 C"/>
+            </ComboBox>
         </StackPanel>
 
         <!-- ListView -->
