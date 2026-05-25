@@ -48,8 +48,7 @@
                     <Border x:Name="Bd"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0">
-                        <ContentPresenter VerticalAlignment="Center"
-                                          Foreground="{TemplateBinding Foreground}"/>
+                        <ContentPresenter VerticalAlignment="Center"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <!-- 悬浮：浅灰 -->
