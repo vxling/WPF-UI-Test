@@ -4,47 +4,62 @@
     <!-- 字体 -->
     <FontFamily x:Key="SystemDefaultFont">Segoe UI</FontFamily>
 
-    <!-- 基础色值 -->
-    <Color x:Key="SystemWindowBackColor">#FFFFFFFF</Color>
-    <Color x:Key="SystemTextPrimaryColor">#FF1A1A1A</Color>
-    <Color x:Key="SystemControlHoverGray">#FFF3F3F3</Color>
+    <!-- 浅色主题配色 -->
+    <SolidColorBrush x:Key="DataGridHeaderBackground" Color="#F3F3F3"/>
+    <SolidColorBrush x:Key="HeaderHoverBg" Color="#E8E8E8"/>
+    <SolidColorBrush x:Key="HeaderPressedBg" Color="#DCDCDC"/>
+    <SolidColorBrush x:Key="DataGridHeaderForeground" Color="#1A1A1A"/>
+    <SolidColorBrush x:Key="DataGridRowBackground" Color="#FFFFFF"/>
+    <SolidColorBrush x:Key="DataGridRowAlternatingBackground" Color="#F9F9F9"/>
+    <SolidColorBrush x:Key="DataGridRowSelectedBackground" Color="#CCE8FF"/>
+    <SolidColorBrush x:Key="DataGridRowSelectedForeground" Color="#000000"/>
+    <SolidColorBrush x:Key="RowSelectedBorder" Color="#99C8F0"/>
 
-    <!-- 刷子 -->
-    <SolidColorBrush x:Key="WindowBackBrush" Color="{StaticResource SystemWindowBackColor}"/>
-    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource SystemTextPrimaryColor}"/>
-    <SolidColorBrush x:Key="ControlHoverGrayBrush" Color="{StaticResource SystemControlHoverGray}"/>
+    <!-- 基础刷子 -->
+    <SolidColorBrush x:Key="WindowBackBrush" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="ControlHoverGrayBrush" Color="#FFF3F3F3"/>
 
-    <!-- ===================== GridView 表头扁平化 ===================== -->
+    <!-- 文本框样式 -->
+    <SolidColorBrush x:Key="TextBoxBackground" Color="#FFFFFFFF"/>
+    <SolidColorBrush x:Key="TextBoxForeground" Color="#FF1A1A1A"/>
+    <SolidColorBrush x:Key="TextBoxBorderBrush" Color="#FFCCCCCC"/>
+    <SolidColorBrush x:Key="TextBoxFocusBorderBrush" Color="#FF0078D4"/>
+
+    <!-- GridView 表头样式 -->
     <Style x:Key="Win11GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
-        <Setter Property="Background" Value="#FFF3F3F3"/>
-        <Setter Property="Foreground" Value="#FF1A1A1A"/>
+        <Setter Property="Background" Value="{DynamicResource DataGridHeaderBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource DataGridHeaderForeground}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="BorderBrush" Value="#FFE0E0E0"/>
         <Setter Property="Padding" Value="6,4"/>
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
         <Setter Property="FontSize" Value="13"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="GridViewColumnHeader">
-                    <Border x:Name="Bd"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            Padding="{TemplateBinding Padding}">
-                        <ContentPresenter HorizontalAlignment="Left"
-                                          VerticalAlignment="Center"/>
-                    </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#FFE8E8E8"/>
-                        </Trigger>
-                        <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="Bd" Property="Background" Value="#FFDCDCDC"/>
-                        </Trigger>
-                    </ControlTemplate.Triggers>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{DynamicResource HeaderHoverBg}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Background" Value="{DynamicResource HeaderPressedBg}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- 文本框样式 -->
+    <Style x:Key="Win11TextBoxStyle" TargetType="TextBox">
+        <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Style.Triggers>
+            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxFocusBorderBrush}"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

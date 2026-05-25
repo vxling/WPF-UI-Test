@@ -10,7 +10,7 @@
         Background="{DynamicResource WindowBackBrush}">
 
     <Window.Resources>
-        <!-- 隐式 style：让 ListViewItem 内容撑满，不会有半个背景的问题 -->
+        <!-- 隐式 ListViewItem 样式 -->
         <Style TargetType="ListViewItem">
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -20,12 +20,15 @@
     </Window.Resources>
 
     <DockPanel Margin="12">
-        <!-- Top bar: label + theme toggle -->
+        <!-- Top bar -->
         <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,0,0,12">
             <TextBlock Text="SyncRecord ListView 选中效果测试" FontSize="16" FontWeight="SemiBold"
                        Foreground="{DynamicResource TextPrimaryBrush}" VerticalAlignment="Center"/>
+            <TextBox x:Name="TestTextBox" Text="输入搜索文件..."
+                     Style="{DynamicResource Win11TextBoxStyle}"
+                     Width="200" Margin="20,0,0,0" VerticalAlignment="Center"/>
             <Button x:Name="ThemeToggleButton" Content="🌙 切换浅色" Click="ThemeToggle_Click"
-                    Margin="20,0,0,0" Padding="12,4" Cursor="Hand"
+                    Margin="12,0,0,0" Padding="12,4" Cursor="Hand"
                     Background="{DynamicResource ControlHoverGrayBrush}"
                     Foreground="{DynamicResource TextPrimaryBrush}"
                     BorderThickness="0"/>
