@@ -26,6 +26,7 @@
                   Background="Transparent"
                   BorderThickness="0"
                   ItemContainerStyle="{DynamicResource Win11FileListItemStyle}"
+                  GridViewColumnHeader.ColumnHeaderStyle="{StaticResource Win11GridViewColumnHeaderStyle}"
                   ItemsSource="{Binding SyncRecords}">
             <ListView.View>
                 <GridView>
