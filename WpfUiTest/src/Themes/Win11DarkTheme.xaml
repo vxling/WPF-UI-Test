@@ -59,26 +59,24 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource DarkControlHoverGrayBrush}"/>
                         </Trigger>
-                        <!-- 选中+窗口活动：白字+深蓝强调条+深灰背景 -->
+                        <!-- 选中+窗口活动：深蓝底白字（Win11深色选中色） -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="True"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FF2A2A2A"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource DarkAccentPrimaryBrush}"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FF1F4A78"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
                             <Setter Property="Foreground" Value="White"/>
                         </MultiTrigger>
-                        <!-- 选中+窗口失活：灰背景+浅蓝条 -->
+                        <!-- 选中+窗口失活：稍浅深蓝底 -->
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="IsSelected" Value="True"/>
                                 <Condition Property="Selector.IsSelectionActive" Value="False"/>
                             </MultiTrigger.Conditions>
-                            <Setter TargetName="Bd" Property="Background" Value="#FF333333"/>
-                            <Setter TargetName="Bd" Property="BorderBrush" Value="#FF60CDFF"/>
-                            <Setter TargetName="Bd" Property="BorderThickness" Value="3,0,0,0"/>
+                            <Setter TargetName="Bd" Property="Background" Value="#FF2A5A8A"/>
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="0"/>
                             <Setter Property="Foreground" Value="White"/>
                         </MultiTrigger>
                     </ControlTemplate.Triggers>
@@ -210,6 +208,36 @@
     <Style x:Key="Win11CheckBoxStyle" TargetType="CheckBox">
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
         <Setter Property="Foreground" Value="{StaticResource DarkTextPrimaryBrush}"/>
+    </Style>
+
+    <!-- ===================== GridView 表头扁平化（去除渐变） ===================== -->
+    <Style x:Key="Win11GridViewColumnHeaderStyle" TargetType="GridViewColumnHeader">
+        <Setter Property="Background" Value="#FF2B2B2B"/>
+        <Setter Property="Foreground" Value="#FFE5E5E5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="BorderBrush" Value="#FF3F3F3F"/>
+        <Setter Property="Padding" Value="6,4"/>
+        <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GridViewColumnHeader">
+                    <Border x:Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}">
+                        <ContentPresenter HorizontalAlignment="Left"
+                                          VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#FF383838"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
     <!-- ===================== 单选框 RadioButton ===================== -->
