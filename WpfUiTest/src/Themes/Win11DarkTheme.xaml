@@ -77,17 +77,39 @@
     <Style x:Key="Win11TextBoxStyle" TargetType="TextBox">
         <Setter Property="Background" Value="{DynamicResource TextBoxBackground}"/>
         <Setter Property="Foreground" Value="{DynamicResource TextBoxForeground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="6,4"/>
         <Setter Property="FontFamily" Value="{StaticResource SystemDefaultFont}"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Style.Triggers>
-            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                <Setter Property="BorderBrush" Value="{DynamicResource TextBoxFocusBorderBrush}"/>
-            </Trigger>
-        </Style.Triggers>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border x:Name="OuterBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{DynamicResource TextBoxBorderBrush}"
+                            BorderThickness="2"
+                            CornerRadius="4">
+                        <Border x:Name="InnerBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="3"
+                                Padding="{TemplateBinding Padding}">
+                            <ScrollViewer x:Name="PART_ContentHost"
+                                          VerticalScrollBarVisibility="Hidden"
+                                          HorizontalScrollBarVisibility="Hidden"/>
+                        </Border>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource TextBoxFocusBorderBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="{DynamicResource TextBoxFocusBorderBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
-
-</ResourceDictionary>
